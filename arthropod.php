@@ -2,8 +2,8 @@
 
 <?php
 
-require './scordatura.php';
-require './chordophone.php';
+require __DIR__ . '/scordatura.php';
+require __DIR__ . '/chordophone.php';
 
 $UID = time() . '-' . substr(md5(rand()), 0, 12);
 
