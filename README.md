@@ -1,10 +1,10 @@
 # Rorschach
-klecksography
+Klecksography
 
 ### Usage
 From the command line:
 
-    `php -f arthropod.php`
+    php -f arthropod.php
 
 ### Distribution
 MIT License
