@@ -5,7 +5,7 @@ Klecksography
 
 ### Download
 
-    https://github.com/reidiiius/rorschach.git
+    git clone https://github.com/reidiiius/rorschach.git
 
 ---
 
