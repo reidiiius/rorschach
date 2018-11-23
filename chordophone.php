@@ -2,69 +2,145 @@
 
 class Chordophone {
 
-  function qrtl ($qp) {
-
-    GLOBAL $UID, $CLV;
-
-      $Tl = $qp . '-' . $UID;
-      $Fn = substr($CLV[$qp], 25, 35) . substr($CLV[$qp], 0, 25);
-      $Cn = substr($CLV[$qp],  0, 60);
-      $Gn = substr($CLV[$qp], 35, 25) . substr($CLV[$qp], 0, 35);
-      $Dn = substr($CLV[$qp], 10, 50) . substr($CLV[$qp], 0, 10);
-      $An = substr($CLV[$qp], 45, 15) . substr($CLV[$qp], 0, 45);
-      $En = substr($CLV[$qp], 20, 40) . substr($CLV[$qp], 0, 20);
-      $Bn = substr($CLV[$qp], -5,  5) . substr($CLV[$qp], 0, 55);
-
-    return $Tl . "\n"
-         . $Fn . "\n"
-         . $Cn . "\n"
-         . $Gn . "\n"
-         . $Dn . "\n"
-         . $An . "\n"
-         . $En . "\n"
-         . $Bn . "\n";
+  private function refer() {
+    $o = include 'scordatura.php';
+    $m = &$o;
+    return $m; 
   }
 
-  function gtrStd ($qp) {
-
-    GLOBAL $UID, $CLV;
-
-      $Tl = $qp . '-' . $UID;
-      $En = substr($CLV[$qp], 20, 40) . substr($CLV[$qp], 0, 20);
-      $Bn = substr($CLV[$qp], -5,  5) . substr($CLV[$qp], 0, 55);
-      $Gn = substr($CLV[$qp], 35, 25) . substr($CLV[$qp], 0, 35);
-      $Dn = substr($CLV[$qp], 10, 50) . substr($CLV[$qp], 0, 10);
-      $An = substr($CLV[$qp], 45, 15) . substr($CLV[$qp], 0, 45);
-      $En = substr($CLV[$qp], 20, 40) . substr($CLV[$qp], 0, 20);
-
-    return $Tl . "\n"
-         . $En . "\n"
-         . $Bn . "\n"
-         . $Gn . "\n"
-         . $Dn . "\n"
-         . $An . "\n"
-         . $En . "\n";
+  private function krypt() {
+    return substr(md5(rand()), 0, 12);
   }
 
-  function cllStd ($qp) {
+  private function epoch() {
+    return time() . '-' . $this->krypt();
+  }
 
-    GLOBAL $UID, $CLV;
+  private function crown($k, $t) {
+    $esc = "\033[0;33m";
+    $cse = "\033[0m";
+    return $esc . $k . $t . $this->epoch() . $cse; 
+  }
 
-      $Tl = $qp . '-' . $UID;
-      $En = substr($CLV[$qp], 20, 40) . substr($CLV[$qp], 0, 20);
-      $An = substr($CLV[$qp], 45, 15) . substr($CLV[$qp], 0, 45);
-      $Dn = substr($CLV[$qp], 10, 50) . substr($CLV[$qp], 0, 10);
-      $Gn = substr($CLV[$qp], 35, 25) . substr($CLV[$qp], 0, 35);
-      $Cn = substr($CLV[$qp],  0, 60);
+  private function str_Bj($s) {
+    return substr($s, 50, 10) . substr($s, 0, 50);
+  }
 
-    return $Tl . "\n"
-         . $En . "\n"
-         . $An . "\n"
-         . $Dn . "\n"
-         . $Gn . "\n"
-         . $Cn . "\n";
+  private function str_Fn($s) {
+    return substr($s, 25, 35) . substr($s, 0, 25);
+  }
+
+  private function str_Cn($s) {
+    return substr($s,  0, 60);
+  }
+
+  private function str_Gn($s) {
+    return substr($s, 35, 25) . substr($s, 0, 35);
+  }
+
+  private function str_Dn($s) {
+    return substr($s, 10, 50) . substr($s, 0, 10);
+  }
+
+  private function str_An($s) {
+    return substr($s, 45, 15) . substr($s, 0, 45);
+  }
+
+  private function str_En($s) {
+    return substr($s, 20, 40) . substr($s, 0, 20);
+  }
+
+  private function str_Bn($s) {
+    return substr($s, -5,  5) . substr($s, 0, 55);
+  }
+
+  private function str_Fk($s) {
+    return substr($s, 30, 30) . substr($s, 0, 30);
+  }
+
+  public function beadgcf ($qp) {
+    $nfo = $this->refer();
+    isSet($nfo[$qp]) ?: $qp = 'n0';
+
+    $Tl = $this->crown($qp, '-beadgcf-');
+    $Fn = $this->str_Fn($nfo[$qp]);
+    $Cn = $this->str_Cn($nfo[$qp]);
+    $Gn = $this->str_Gn($nfo[$qp]);
+    $Dn = $this->str_Dn($nfo[$qp]);
+    $An = $this->str_An($nfo[$qp]);
+    $En = $this->str_En($nfo[$qp]);
+    $Bn = $this->str_Bn($nfo[$qp]);
+
+    return  "\n\t"
+    . $Tl . "\n\t"
+    . $Fn . "\n\t"
+    . $Cn . "\n\t"
+    . $Gn . "\n\t"
+    . $Dn . "\n\t"
+    . $An . "\n\t"
+    . $En . "\n\t"
+    . $Bn . "\n\n";
+  }
+
+  public function cgdae ($qp) {
+    $nfo = $this->refer();
+    isSet($nfo[$qp]) ?: $qp = 'n0';
+
+    $Tl = $this->crown($qp, '-cgdae-');
+    $En = $this->str_En($nfo[$qp]);
+    $An = $this->str_An($nfo[$qp]);
+    $Dn = $this->str_Dn($nfo[$qp]);
+    $Gn = $this->str_Gn($nfo[$qp]);
+    $Cn = $this->str_Cn($nfo[$qp]);
+
+    return  "\n\t"
+    . $Tl . "\n\t"
+    . $En . "\n\t"
+    . $An . "\n\t"
+    . $Dn . "\n\t"
+    . $Gn . "\n\t"
+    . $Cn . "\n\n";
+  }
+
+  public function eadgbe ($qp) {
+    $nfo = $this->refer();
+    isSet($nfo[$qp]) ?: $qp = 'n0';
+
+    $Tl = $this->crown($qp, '-eadgbe-');
+    $Bn = $this->str_Bn($nfo[$qp]);
+    $Gn = $this->str_Gn($nfo[$qp]);
+    $Dn = $this->str_Dn($nfo[$qp]);
+    $An = $this->str_An($nfo[$qp]);
+    $En = $this->str_En($nfo[$qp]);
+
+    return  "\n\t"
+    . $Tl . "\n\t"
+    . $En . "\n\t"
+    . $Bn . "\n\t"
+    . $Gn . "\n\t"
+    . $Dn . "\n\t"
+    . $An . "\n\t"
+    . $En . "\n\n";
+  }
+
+  public function fkbjdn ($qp) {
+    $nfo = $this->refer();
+    isSet($nfo[$qp]) ?: $qp = 'n0';
+
+    $Tl = $this->crown($qp, '-fkbjdn-');
+    $Dn = $this->str_Dn($nfo[$qp]);
+    $Bj = $this->str_Bj($nfo[$qp]);
+    $Fk = $this->str_Fk($nfo[$qp]);
+
+    return  "\n\t"
+    . $Tl . "\n\t"
+    . $Dn . "\n\t"
+    . $Bj . "\n\t"
+    . $Fk . "\n\t"
+    . $Dn . "\n\t"
+    . $Bj . "\n\t"
+    . $Fk . "\n\n";
   }
 
 }
 
-?>
