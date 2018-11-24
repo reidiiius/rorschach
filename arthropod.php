@@ -5,14 +5,12 @@
 require __DIR__ . '/chordophone.php';
 
 if ($argc > 1) {
+  $pruned = array_shift($argv);
   $Tuning = new Chordophone;
   $pegbox = 'eadgbe';
 
-  if (isSet($argv[1])) {
-    echo $Tuning->$pegbox($argv[1]);
-  }
-  if (isSet($argv[2])) {
-    echo $Tuning->$pegbox($argv[2]);
+  foreach($argv as $elm) {
+    echo $Tuning->$pegbox($elm);
   }
   echo "\n";
 }
@@ -34,4 +32,6 @@ else {
 \n
 TOC;
 }
+
+exit(0);
 

@@ -2,9 +2,19 @@
 
 class Chordophone {
 
-  private function refer() {
+  private function tacet() {
+    $s = '';
+    $i = 12;
+    while ($i) {
+      $s .= '____ ';
+      $i--;
+    }
+    return $s;
+  }
+
+  private function refer($k) {
     $o = include 'scordatura.php';
-    $m = &$o;
+    isSet($o[$k]) ? $m = $o[$k] : $m = self::tacet();
     return $m; 
   }
 
@@ -13,13 +23,13 @@ class Chordophone {
   }
 
   private function epoch() {
-    return time() . '-' . $this->krypt();
+    return time() . '-' . self::krypt();
   }
 
-  private function crown($k, $t) {
+  private function diadem($k, $t) {
     $esc = "\033[0;33m";
     $cse = "\033[0m";
-    return $esc . $k . $t . $this->epoch() . $cse; 
+    return $esc . "$k-" . "$t-" . self::epoch() . $cse; 
   }
 
   private function str_Bj($s) {
@@ -59,17 +69,17 @@ class Chordophone {
   }
 
   public function beadgcf ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = self::refer($qp);
 
-    $Tl = $this->crown($qp, '-beadgcf-');
-    $Fn = $this->str_Fn($nfo[$qp]);
-    $Cn = $this->str_Cn($nfo[$qp]);
-    $Gn = $this->str_Gn($nfo[$qp]);
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $An = $this->str_An($nfo[$qp]);
-    $En = $this->str_En($nfo[$qp]);
-    $Bn = $this->str_Bn($nfo[$qp]);
+    $Tl = self::diadem($qp, $prc);
+    $Fn = self::str_Fn($nfo);
+    $Cn = self::str_Cn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Dn = self::str_Dn($nfo);
+    $An = self::str_An($nfo);
+    $En = self::str_En($nfo);
+    $Bn = self::str_Bn($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -83,15 +93,15 @@ class Chordophone {
   }
 
   public function cgdae ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = self::refer($qp);
 
-    $Tl = $this->crown($qp, '-cgdae-');
-    $En = $this->str_En($nfo[$qp]);
-    $An = $this->str_An($nfo[$qp]);
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $Gn = $this->str_Gn($nfo[$qp]);
-    $Cn = $this->str_Cn($nfo[$qp]);
+    $Tl = self::diadem($qp, $prc);
+    $En = self::str_En($nfo);
+    $An = self::str_An($nfo);
+    $Dn = self::str_Dn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Cn = self::str_Cn($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -103,15 +113,15 @@ class Chordophone {
   }
 
   public function eadgbe ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = self::refer($qp);
 
-    $Tl = $this->crown($qp, '-eadgbe-');
-    $Bn = $this->str_Bn($nfo[$qp]);
-    $Gn = $this->str_Gn($nfo[$qp]);
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $An = $this->str_An($nfo[$qp]);
-    $En = $this->str_En($nfo[$qp]);
+    $Tl = self::diadem($qp, $prc);
+    $Bn = self::str_Bn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Dn = self::str_Dn($nfo);
+    $An = self::str_An($nfo);
+    $En = self::str_En($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -124,13 +134,13 @@ class Chordophone {
   }
 
   public function fkbjdn ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = self::refer($qp);
 
-    $Tl = $this->crown($qp, '-fkbjdn-');
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $Bj = $this->str_Bj($nfo[$qp]);
-    $Fk = $this->str_Fk($nfo[$qp]);
+    $Tl = self::diadem($qp, $prc);
+    $Dn = self::str_Dn($nfo);
+    $Bj = self::str_Bj($nfo);
+    $Fk = self::str_Fk($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
