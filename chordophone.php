@@ -2,7 +2,7 @@
 
 class Chordophone {
 
-  private function tacet() {
+  private static function tacet() {
     $s = '';
     $i = 12;
     while ($i) {
@@ -12,12 +12,12 @@ class Chordophone {
     return $s;
   }
 
-  private function retrieve($k) {
+  protected static function retrieve($k) {
     $dataBank = __DIR__ . '/scordatura.php';
     try {
       if (file_exists($dataBank)) {
         $o = include $dataBank;
-        $m = isSet($o[$k]) ? $o[$k] : $this->tacet();
+        $m = isSet($o[$k]) ? $o[$k] : self::tacet();
         return $m; 
       }
       else {
@@ -30,68 +30,72 @@ class Chordophone {
     }
   }
 
-  private function krypt() {
+  private static function krypt() {
     return substr(md5(rand()), 0, 12);
   }
 
-  private function epoch() {
-    return time() . '-' . $this->krypt();
+  private static function epoch() {
+    return time() . '-' . self::krypt();
   }
 
-  private function diadem($k, $t) {
+  protected static function diadem($k, $t) {
     $esc = "\033[0;33m";
     $cse = "\033[0m";
-    return $esc . "$k-" . "$t-" . $this->epoch() . $cse; 
+    return $esc . "$k-" . "$t-" . self::epoch() . $cse; 
   }
 
-  private function str_Bj($s) {
+  protected static function str_Bj($s) {
     return substr($s, 50, 10) . substr($s, 0, 50);
   }
 
-  private function str_Fn($s) {
+  protected static function str_Fn($s) {
     return substr($s, 25, 35) . substr($s, 0, 25);
   }
 
-  private function str_Cn($s) {
+  protected static function str_Cn($s) {
     return substr($s,  0, 60);
   }
 
-  private function str_Gn($s) {
+  protected static function str_Gn($s) {
     return substr($s, 35, 25) . substr($s, 0, 35);
   }
 
-  private function str_Dn($s) {
+  protected static function str_Dn($s) {
     return substr($s, 10, 50) . substr($s, 0, 10);
   }
 
-  private function str_An($s) {
+  protected static function str_An($s) {
     return substr($s, 45, 15) . substr($s, 0, 45);
   }
 
-  private function str_En($s) {
+  protected static function str_En($s) {
     return substr($s, 20, 40) . substr($s, 0, 20);
   }
 
-  private function str_Bn($s) {
+  protected static function str_Bn($s) {
     return substr($s, -5,  5) . substr($s, 0, 55);
   }
 
-  private function str_Fk($s) {
+  protected static function str_Fk($s) {
     return substr($s, 30, 30) . substr($s, 0, 30);
   }
 
-  public function beadgcf ($qp) {
-    $prc = __FUNCTION__;
-    $nfo = $this->retrieve($qp);
+}
 
-    $Tl = $this->diadem($qp, $prc);
-    $Fn = $this->str_Fn($nfo);
-    $Cn = $this->str_Cn($nfo);
-    $Gn = $this->str_Gn($nfo);
-    $Dn = $this->str_Dn($nfo);
-    $An = $this->str_An($nfo);
-    $En = $this->str_En($nfo);
-    $Bn = $this->str_Bn($nfo);
+class Heptachord extends Chordophone {
+
+  public static function beadgcf ($qp='n0') {
+    $prc = __FUNCTION__;
+    $nfo = self::retrieve($qp);
+
+    $Tl = self::diadem($qp, $prc);
+    $Fn = self::str_Fn($nfo);
+    $Cn = self::str_Cn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Dn = self::str_Dn($nfo);
+    $An = self::str_An($nfo);
+    $En = self::str_En($nfo);
+    $Bn = self::str_Bn($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -104,16 +108,20 @@ class Chordophone {
     . $Bn . "\n\n";
   }
 
-  public function cgdae ($qp) {
-    $prc = __FUNCTION__;
-    $nfo = $this->retrieve($qp);
+}
 
-    $Tl = $this->diadem($qp, $prc);
-    $En = $this->str_En($nfo);
-    $An = $this->str_An($nfo);
-    $Dn = $this->str_Dn($nfo);
-    $Gn = $this->str_Gn($nfo);
-    $Cn = $this->str_Cn($nfo);
+class Pentachord extends Chordophone {
+
+  public static function cgdae ($qp='n0') {
+    $prc = __FUNCTION__;
+    $nfo = self::retrieve($qp);
+
+    $Tl = self::diadem($qp, $prc);
+    $En = self::str_En($nfo);
+    $An = self::str_An($nfo);
+    $Dn = self::str_Dn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Cn = self::str_Cn($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -124,16 +132,20 @@ class Chordophone {
     . $Cn . "\n\n";
   }
 
-  public function eadgbe ($qp) {
-    $prc = __FUNCTION__;
-    $nfo = $this->retrieve($qp);
+}
 
-    $Tl = $this->diadem($qp, $prc);
-    $Bn = $this->str_Bn($nfo);
-    $Gn = $this->str_Gn($nfo);
-    $Dn = $this->str_Dn($nfo);
-    $An = $this->str_An($nfo);
-    $En = $this->str_En($nfo);
+class Hexachord extends Chordophone {
+
+  public static function eadgbe ($qp='n0') {
+    $prc = __FUNCTION__;
+    $nfo = self::retrieve($qp);
+
+    $Tl = self::diadem($qp, $prc);
+    $Bn = self::str_Bn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Dn = self::str_Dn($nfo);
+    $An = self::str_An($nfo);
+    $En = self::str_En($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -145,14 +157,14 @@ class Chordophone {
     . $En . "\n\n";
   }
 
-  public function fkbjdn ($qp) {
+  public static function fkbjdn ($qp='n0') {
     $prc = __FUNCTION__;
-    $nfo = $this->retrieve($qp);
+    $nfo = self::retrieve($qp);
 
-    $Tl = $this->diadem($qp, $prc);
-    $Dn = $this->str_Dn($nfo);
-    $Bj = $this->str_Bj($nfo);
-    $Fk = $this->str_Fk($nfo);
+    $Tl = self::diadem($qp, $prc);
+    $Dn = self::str_Dn($nfo);
+    $Bj = self::str_Bj($nfo);
+    $Fk = self::str_Fk($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
