@@ -2,10 +2,32 @@
 
 class Chordophone {
 
-  private function refer() {
-    $o = include 'scordatura.php';
-    $m = &$o;
-    return $m; 
+  private function tacet() {
+    $s = '';
+    $i = 12;
+    while ($i) {
+      $s .= '____ ';
+      $i--;
+    }
+    return $s;
+  }
+
+  private function retrieve($k) {
+    $dataBank = __DIR__ . '/scordatura.php';
+    try {
+      if (file_exists($dataBank)) {
+        $o = include $dataBank;
+        $m = isSet($o[$k]) ? $o[$k] : $this->tacet();
+        return $m; 
+      }
+      else {
+        throw new Exception('Check: ' . "$dataBank");
+      }
+    }
+    catch (Exception $anomaly) {
+      echo "\033[1;31m\t", $anomaly->getMessage(), "\033[0m\n\n";
+      exit(1);
+    }
   }
 
   private function krypt() {
@@ -16,10 +38,10 @@ class Chordophone {
     return time() . '-' . $this->krypt();
   }
 
-  private function crown($k, $t) {
+  private function diadem($k, $t) {
     $esc = "\033[0;33m";
     $cse = "\033[0m";
-    return $esc . $k . $t . $this->epoch() . $cse; 
+    return $esc . "$k-" . "$t-" . $this->epoch() . $cse; 
   }
 
   private function str_Bj($s) {
@@ -59,17 +81,17 @@ class Chordophone {
   }
 
   public function beadgcf ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = $this->retrieve($qp);
 
-    $Tl = $this->crown($qp, '-beadgcf-');
-    $Fn = $this->str_Fn($nfo[$qp]);
-    $Cn = $this->str_Cn($nfo[$qp]);
-    $Gn = $this->str_Gn($nfo[$qp]);
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $An = $this->str_An($nfo[$qp]);
-    $En = $this->str_En($nfo[$qp]);
-    $Bn = $this->str_Bn($nfo[$qp]);
+    $Tl = $this->diadem($qp, $prc);
+    $Fn = $this->str_Fn($nfo);
+    $Cn = $this->str_Cn($nfo);
+    $Gn = $this->str_Gn($nfo);
+    $Dn = $this->str_Dn($nfo);
+    $An = $this->str_An($nfo);
+    $En = $this->str_En($nfo);
+    $Bn = $this->str_Bn($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -83,15 +105,15 @@ class Chordophone {
   }
 
   public function cgdae ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = $this->retrieve($qp);
 
-    $Tl = $this->crown($qp, '-cgdae-');
-    $En = $this->str_En($nfo[$qp]);
-    $An = $this->str_An($nfo[$qp]);
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $Gn = $this->str_Gn($nfo[$qp]);
-    $Cn = $this->str_Cn($nfo[$qp]);
+    $Tl = $this->diadem($qp, $prc);
+    $En = $this->str_En($nfo);
+    $An = $this->str_An($nfo);
+    $Dn = $this->str_Dn($nfo);
+    $Gn = $this->str_Gn($nfo);
+    $Cn = $this->str_Cn($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -103,15 +125,15 @@ class Chordophone {
   }
 
   public function eadgbe ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = $this->retrieve($qp);
 
-    $Tl = $this->crown($qp, '-eadgbe-');
-    $Bn = $this->str_Bn($nfo[$qp]);
-    $Gn = $this->str_Gn($nfo[$qp]);
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $An = $this->str_An($nfo[$qp]);
-    $En = $this->str_En($nfo[$qp]);
+    $Tl = $this->diadem($qp, $prc);
+    $Bn = $this->str_Bn($nfo);
+    $Gn = $this->str_Gn($nfo);
+    $Dn = $this->str_Dn($nfo);
+    $An = $this->str_An($nfo);
+    $En = $this->str_En($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"
@@ -124,13 +146,13 @@ class Chordophone {
   }
 
   public function fkbjdn ($qp) {
-    $nfo = $this->refer();
-    isSet($nfo[$qp]) ?: $qp = 'n0';
+    $prc = __FUNCTION__;
+    $nfo = $this->retrieve($qp);
 
-    $Tl = $this->crown($qp, '-fkbjdn-');
-    $Dn = $this->str_Dn($nfo[$qp]);
-    $Bj = $this->str_Bj($nfo[$qp]);
-    $Fk = $this->str_Fk($nfo[$qp]);
+    $Tl = $this->diadem($qp, $prc);
+    $Dn = $this->str_Dn($nfo);
+    $Bj = $this->str_Bj($nfo);
+    $Fk = $this->str_Fk($nfo);
 
     return  "\n\t"
     . $Tl . "\n\t"

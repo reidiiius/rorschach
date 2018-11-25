@@ -12,11 +12,9 @@ Klecksography
 ### Usage
 command line
 
-    cd rorschach/
+    php -f rorschach/arthropod.php
 
-    php -f arthropod.php
-
-    php -f arthropod.php j3 k1 
+    php -f rorschach/arthropod.php j3 k1 
 
 ---
 

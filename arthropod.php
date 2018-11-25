@@ -1,18 +1,30 @@
 #!/usr/bin/php
 
 <?php
+error_reporting(E_ALL);
 
-require __DIR__ . '/chordophone.php';
+$herringBone =  __DIR__ . '/chordophone.php';
+
+try {
+  if (file_exists($herringBone)) {
+    require $herringBone;
+  }
+  else {
+    throw new Exception('Check: ' . $herringBone);
+  }
+}
+catch (Exception $anomaly) {
+  echo "\033[1;31m\t", $anomaly->getMessage(), "\033[0m\n\n";
+  exit(1);
+}
 
 if ($argc > 1) {
+  $pruned = array_shift($argv);
   $Tuning = new Chordophone;
   $pegbox = 'eadgbe';
 
-  if (isSet($argv[1])) {
-    echo $Tuning->$pegbox($argv[1]);
-  }
-  if (isSet($argv[2])) {
-    echo $Tuning->$pegbox($argv[2]);
+  foreach($argv as $elm) {
+    echo $Tuning->$pegbox($elm);
   }
   echo "\n";
 }
@@ -34,4 +46,6 @@ else {
 \n
 TOC;
 }
+
+exit(0);
 
