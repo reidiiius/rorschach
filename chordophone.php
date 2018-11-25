@@ -2,7 +2,7 @@
 
 class Chordophone {
 
-  private function tacet() {
+  private static function tacet() {
     $s = '';
     $i = 12;
     while ($i) {
@@ -12,65 +12,81 @@ class Chordophone {
     return $s;
   }
 
-  private function refer($k) {
-    $o = include 'scordatura.php';
-    isSet($o[$k]) ? $m = $o[$k] : $m = self::tacet();
-    return $m; 
+  protected static function retrieve($k) {
+    $dataBank = __DIR__ . '/scordatura.php';
+    try {
+      if (file_exists($dataBank)) {
+        $o = include $dataBank;
+        $m = isSet($o[$k]) ? $o[$k] : self::tacet();
+        return $m; 
+      }
+      else {
+        throw new Exception('Check: ' . "$dataBank");
+      }
+    }
+    catch (Exception $anomaly) {
+      echo "\033[1;31m\t", $anomaly->getMessage(), "\033[0m\n\n";
+      exit(1);
+    }
   }
 
-  private function krypt() {
+  private static function krypt() {
     return substr(md5(rand()), 0, 12);
   }
 
-  private function epoch() {
+  private static function epoch() {
     return time() . '-' . self::krypt();
   }
 
-  private function diadem($k, $t) {
+  protected static function diadem($k, $t) {
     $esc = "\033[0;33m";
     $cse = "\033[0m";
     return $esc . "$k-" . "$t-" . self::epoch() . $cse; 
   }
 
-  private function str_Bj($s) {
+  protected static function str_Bj($s) {
     return substr($s, 50, 10) . substr($s, 0, 50);
   }
 
-  private function str_Fn($s) {
+  protected static function str_Fn($s) {
     return substr($s, 25, 35) . substr($s, 0, 25);
   }
 
-  private function str_Cn($s) {
+  protected static function str_Cn($s) {
     return substr($s,  0, 60);
   }
 
-  private function str_Gn($s) {
+  protected static function str_Gn($s) {
     return substr($s, 35, 25) . substr($s, 0, 35);
   }
 
-  private function str_Dn($s) {
+  protected static function str_Dn($s) {
     return substr($s, 10, 50) . substr($s, 0, 10);
   }
 
-  private function str_An($s) {
+  protected static function str_An($s) {
     return substr($s, 45, 15) . substr($s, 0, 45);
   }
 
-  private function str_En($s) {
+  protected static function str_En($s) {
     return substr($s, 20, 40) . substr($s, 0, 20);
   }
 
-  private function str_Bn($s) {
+  protected static function str_Bn($s) {
     return substr($s, -5,  5) . substr($s, 0, 55);
   }
 
-  private function str_Fk($s) {
+  protected static function str_Fk($s) {
     return substr($s, 30, 30) . substr($s, 0, 30);
   }
 
-  public function beadgcf ($qp) {
+}
+
+class Heptachord extends Chordophone {
+
+  public static function beadgcf ($qp='n0') {
     $prc = __FUNCTION__;
-    $nfo = self::refer($qp);
+    $nfo = self::retrieve($qp);
 
     $Tl = self::diadem($qp, $prc);
     $Fn = self::str_Fn($nfo);
@@ -92,9 +108,13 @@ class Chordophone {
     . $Bn . "\n\n";
   }
 
-  public function cgdae ($qp) {
+}
+
+class Pentachord extends Chordophone {
+
+  public static function cgdae ($qp='n0') {
     $prc = __FUNCTION__;
-    $nfo = self::refer($qp);
+    $nfo = self::retrieve($qp);
 
     $Tl = self::diadem($qp, $prc);
     $En = self::str_En($nfo);
@@ -112,9 +132,13 @@ class Chordophone {
     . $Cn . "\n\n";
   }
 
-  public function eadgbe ($qp) {
+}
+
+class Hexachord extends Chordophone {
+
+  public static function eadgbe ($qp='n0') {
     $prc = __FUNCTION__;
-    $nfo = self::refer($qp);
+    $nfo = self::retrieve($qp);
 
     $Tl = self::diadem($qp, $prc);
     $Bn = self::str_Bn($nfo);
@@ -133,9 +157,9 @@ class Chordophone {
     . $En . "\n\n";
   }
 
-  public function fkbjdn ($qp) {
+  public static function fkbjdn ($qp='n0') {
     $prc = __FUNCTION__;
-    $nfo = self::refer($qp);
+    $nfo = self::retrieve($qp);
 
     $Tl = self::diadem($qp, $prc);
     $Dn = self::str_Dn($nfo);
