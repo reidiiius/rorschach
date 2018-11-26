@@ -5,11 +5,19 @@ class Chordophone {
   private static function tacet() {
     $s = '';
     $i = 12;
-    while ($i) {
+    while ($i > 0) {
       $s .= '____ ';
       $i--;
     }
     return $s;
+  }
+
+  private static function morph($s) {
+    $m = ['Hg','Pu','Sn','Ur','Mn','Cu','Pb','Au','Np','Ag','Ti','Fe'];
+    $v = ['v9','zR','t7','xP','p3','r5','wN','u8','yQ','s6','o2','q4'];
+    $r = str_replace($m, $v, $s);
+    $u = str_replace(' ', '|', $r);
+    return $u;
   }
 
   protected static function retrieve($k) {
@@ -19,7 +27,8 @@ class Chordophone {
         $a = include $dataBank;
         $b = array_key_exists($k, $a);
         $s = $b ? $a[$k] : self::tacet();
-        return $s; 
+        $z = self::morph($s);
+        return $z; 
       }
       else {
         throw new Exception('Check: ' . "$dataBank");
