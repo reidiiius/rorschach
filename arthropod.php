@@ -20,11 +20,10 @@ catch (Exception $anomaly) {
 
 if ($argc > 1) {
   $pruned = array_shift($argv);
-  $Tuning = new Hexachord;
-  $pegbox = 'eadgbe';
+  $Guitar = new Hexachord;
 
-  foreach($argv as $elm) {
-    echo $Tuning->$pegbox($elm);
+  foreach($argv as $signat) {
+    echo $Guitar->eadgbe($signat);
   }
   echo "\n";
 }

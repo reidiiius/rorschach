@@ -16,9 +16,10 @@ class Chordophone {
     $dataBank = __DIR__ . '/scordatura.php';
     try {
       if (file_exists($dataBank)) {
-        $o = include $dataBank;
-        $m = isSet($o[$k]) ? $o[$k] : self::tacet();
-        return $m; 
+        $a = include $dataBank;
+        $b = array_key_exists($k, $a);
+        $s = $b ? $a[$k] : self::tacet();
+        return $s; 
       }
       else {
         throw new Exception('Check: ' . "$dataBank");
