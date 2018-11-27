@@ -2,14 +2,32 @@
 
 class Chordophone {
 
-  private static function tacet() {
+  private static function tacet($c='____ ', $n=12) {
     $s = '';
-    $i = 12;
-    while ($i) {
-      $s .= '____ ';
+    $i = $n;
+    while ($i > 0) {
+      $s .= $c;
       $i--;
     }
     return $s;
+  }
+
+  protected static function metric($s, $n=60) {
+    if (strlen($s) === $n) {
+      return $s;
+    }
+    else {
+      return self::tacet('???? ');
+    }
+  }
+
+  private static function morph($s) {
+    $m = ['Hg','Pu','Sn','Ur','Mn','Cu','Pb','Au','Np','Ag','Ti','Fe'];
+    $v = ['v9','zR','t7','xP','p3','r5','wN','u8','yQ','s6','o2','q4'];
+    $r = str_replace($m, $v, $s);
+    $u = str_replace(' ', '|', $r);
+    $z = self::metric($u);
+    return $z;
   }
 
   protected static function retrieve($k) {
@@ -19,7 +37,8 @@ class Chordophone {
         $a = include $dataBank;
         $b = array_key_exists($k, $a);
         $s = $b ? $a[$k] : self::tacet();
-        return $s; 
+        $z = self::morph($s);
+        return $z;
       }
       else {
         throw new Exception('Check: ' . "$dataBank");
