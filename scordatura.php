@@ -86,4 +86,3 @@ return array(
 'k2j56y7' => "NpCu ____ ____ FePu HgHg PuFe SnTi ____ CuNp PbAu ____ ____ "
 );
 
-
