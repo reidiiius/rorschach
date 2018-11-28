@@ -2,14 +2,21 @@
 
 class Chordophone {
 
-  private static function tacet() {
+  private static function tacet($c='____ ', $n=12) {
     $s = '';
-    $i = 12;
+    $i = $n;
     while ($i > 0) {
-      $s .= '____ ';
+      $s .= $c;
       $i--;
     }
     return $s;
+  }
+
+  protected static function metric($s, $n=60) {
+    $m = strlen($s);
+    $b = ($m === $n);
+    $y = $b ? $s : self::tacet("=$m? ");
+    return $y;
   }
 
   private static function morph($s) {
@@ -17,7 +24,8 @@ class Chordophone {
     $v = ['v9','zR','t7','xP','p3','r5','wN','u8','yQ','s6','o2','q4'];
     $r = str_replace($m, $v, $s);
     $u = str_replace(' ', '|', $r);
-    return $u;
+    $z = self::metric($u);
+    return $z;
   }
 
   protected static function retrieve($k) {
@@ -28,7 +36,7 @@ class Chordophone {
         $b = array_key_exists($k, $a);
         $s = $b ? $a[$k] : self::tacet();
         $z = self::morph($s);
-        return $z; 
+        return $z;
       }
       else {
         throw new Exception('Check: ' . "$dataBank");
@@ -88,6 +96,40 @@ class Chordophone {
 
   protected static function str_Fk($s) {
     return substr($s, 30, 30) . substr($s, 0, 30);
+  }
+
+  private static function layout($a) {
+    $n = count($a);
+    setType($s, 'string');
+    for ($i = 0; $i < $n; $i++) {
+      if (!($i == 0) and ($i % 7 == 0) or ($i == $n)) { $s .= "\n"; }
+      $s .= "\t{$a[$i]}";
+    }
+    $s .= "\n\n";
+    return $s;
+  } 
+
+  public static function get_menu() {
+    $corundum = [
+      'j136y7', 'j167y2', 'j17', 'j17y2', 'j2', 'j23', 'j236',
+      'j23k6', 'j246y3', 'j26', 'j26y3', 'j26y34', 'j2k56', 'j2k56x4',
+      'j2k6', 'j2k6x5', 'j2k6y3', 'j2y3', 'j3', 'j34k6', 'j36',
+      'j3k56x4', 'j3k5x4', 'j3k6', 'j6', 'k157x6', 'k1j6', 'k256',
+      'k26', 'k26x5', 'k2j17', 'k2j6', 'k56', 'k56x4', 'k6',
+      'k6x5', 'n0', 'n167x4', 'n26y5', 'n345', 'n45y2', 'n5y2'
+    ];
+
+    $emerald = [
+      'k135x4', 'k345x2', 'k34', 'k34x2', 'k2', 'k12', 'k125',
+      'k12j5', 'k257x1', 'k25', 'k25x1', 'k25x17', 'k2j56', 'k2j56y7',
+      'k2j5', 'k2j5y6', 'k2j5x1', 'k2x1', 'k1', 'k17j5', 'k15',
+      'k1j56y7', 'k1j6y7', 'k1j5', 'k5', 'j346y5', 'j3k5', 'j256',
+      'j25', 'j25y6', 'j2k34', 'j2k5', 'j56', 'j56y7', 'j5',
+      'j5y6', 'n0', 'n345y7', 'n25x6', 'n167', 'n67x2', 'n6x2'
+    ];
+ 
+    $s = self::layout($corundum) . self::layout($emerald);
+    return $s;
   }
 
 }
