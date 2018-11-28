@@ -14,8 +14,7 @@ class Chordophone {
 
   protected static function metric($s, $n=60) {
     $m = strlen($s);
-    $b = ($m === $n);
-    $y = $b ? $s : self::tacet("=$m? ");
+    $y = ($m === $n) ? $s : self::tacet("=$m? ");
     return $y;
   }
 
