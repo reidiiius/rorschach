@@ -19,13 +19,18 @@ catch (Exception $anomaly) {
 }
 
 if ($argc > 1) {
-  $pruned = array_shift($argv);
-  $Guitar = new Hexachord;
-
-  foreach($argv as $signat) {
-    echo $Guitar->eadgbe($signat);
+  if ($argv[1] === 'druk') {
+    echo Nonachord::ennead();
   }
-  echo "\n";
+  else {
+    $pruned = array_shift($argv);
+    $Guitar = new Hexachord;
+
+    foreach($argv as $signat) {
+      echo $Guitar->eadgbe($signat);
+    }
+    echo "\n";
+  }
 }
 else {
   echo Chordophone::get_menu();

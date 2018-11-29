@@ -2,13 +2,36 @@
 
 class Chordophone {
 
-  private static function tacet($c='____ ', $n=12) {
-    $s = '';
-    $i = $n;
-    while ($i > 0) {
-      $s .= $c;
-      $i--;
-    }
+  protected static function gemstone($s='ruby') {
+    $ruby = [
+      'j136y7', 'j167y2', 'j17', 'j17y2', 'j2', 'j23', 'j236',
+      'j23k6', 'j246y3', 'j26', 'j26y3', 'j26y34', 'j2k56', 'j2k56x4',
+      'j2k6', 'j2k6x5', 'j2k6y3', 'j2y3', 'j3', 'j34k6', 'j36',
+      'j3k56x4', 'j3k5x4', 'j3k6', 'j6', 'k157x6', 'k1j6', 'k256',
+      'k26', 'k26x5', 'k2j17', 'k2j6', 'k56', 'k56x4', 'k6',
+      'k6x5', 'n0', 'n167x4', 'n26y5', 'n345', 'n45y2', 'n5y2'
+    ];
+
+    $opal = [
+      'k135x4', 'k345x2', 'k34', 'k34x2', 'k2', 'k12', 'k125',
+      'k12j5', 'k257x1', 'k25', 'k25x1', 'k25x17', 'k2j56', 'k2j56y7',
+      'k2j5', 'k2j5y6', 'k2j5x1', 'k2x1', 'k1', 'k17j5', 'k15',
+      'k1j56y7', 'k1j6y7', 'k1j5', 'k5', 'j346y5', 'j3k5', 'j256',
+      'j25', 'j25y6', 'j2k34', 'j2k5', 'j56', 'j56y7', 'j5',
+      'j5y6', 'n0', 'n345y7', 'n25x6', 'n167', 'n67x2', 'n6x2'
+    ];
+
+    return ${$s}; 
+  }
+
+  protected static function unansi($s) {
+    $h = str_ireplace("\033[0;33m", '', $s);
+    $t = str_ireplace("\033[0m", '', $h);
+    return $t;
+  }
+
+  protected static function tacet($c='____ ', $n=12) {
+    $s = str_repeat($c, $n);
     return $s;
   }
 
@@ -109,25 +132,50 @@ class Chordophone {
   } 
 
   public static function get_menu() {
-    $corundum = [
-      'j136y7', 'j167y2', 'j17', 'j17y2', 'j2', 'j23', 'j236',
-      'j23k6', 'j246y3', 'j26', 'j26y3', 'j26y34', 'j2k56', 'j2k56x4',
-      'j2k6', 'j2k6x5', 'j2k6y3', 'j2y3', 'j3', 'j34k6', 'j36',
-      'j3k56x4', 'j3k5x4', 'j3k6', 'j6', 'k157x6', 'k1j6', 'k256',
-      'k26', 'k26x5', 'k2j17', 'k2j6', 'k56', 'k56x4', 'k6',
-      'k6x5', 'n0', 'n167x4', 'n26y5', 'n345', 'n45y2', 'n5y2'
-    ];
+    $r = self::gemstone('ruby');
+    $o = self::gemstone('opal');
+    $s = self::layout($r) . self::layout($o);
+    return $s;
+  }
 
-    $emerald = [
-      'k135x4', 'k345x2', 'k34', 'k34x2', 'k2', 'k12', 'k125',
-      'k12j5', 'k257x1', 'k25', 'k25x1', 'k25x17', 'k2j56', 'k2j56y7',
-      'k2j5', 'k2j5y6', 'k2j5x1', 'k2x1', 'k1', 'k17j5', 'k15',
-      'k1j56y7', 'k1j6y7', 'k1j5', 'k5', 'j346y5', 'j3k5', 'j256',
-      'j25', 'j25y6', 'j2k34', 'j2k5', 'j56', 'j56y7', 'j5',
-      'j5y6', 'n0', 'n345y7', 'n25x6', 'n167', 'n67x2', 'n6x2'
-    ];
- 
-    $s = self::layout($corundum) . self::layout($emerald);
+}
+
+class Nonachord extends Chordophone {
+
+  public static function ennead() {
+    $r = self::gemstone('ruby');
+    $o = self::gemstone('opal');
+    $a = [$r, $o];
+    $s = '';
+
+    for ($i = 0; $i < count($a); $i++) {
+      foreach($a[$i] as $qp) {
+        $prc = __FUNCTION__;
+        $nfo = self::retrieve($qp);
+        $ttl = self::diadem($qp, $prc);
+
+        $Tl = self::unansi($ttl);
+        $Bj = self::str_Bj($nfo);
+        $Fn = self::str_Fn($nfo);
+        $Cn = self::str_Cn($nfo);
+        $Gn = self::str_Gn($nfo);
+        $Dn = self::str_Dn($nfo);
+        $An = self::str_An($nfo);
+        $En = self::str_En($nfo);
+        $Bn = self::str_Bn($nfo);
+        $Fk = self::str_Fk($nfo);
+
+        $t = "\n\t";
+        $fmt = "$t%s$t%s$t%s$t%s$t%s$t%s$t%s$t%s$t%s$t%s\n\n";
+        $s .= sprintf($fmt, $Tl, $Bj, $Fn, $Cn, $Gn, $Dn, $An, $En, $Bn, $Fk);
+      }
+
+      if ($i === 0) { 
+        $c = str_repeat('~', 60);
+        $s .= "\n\t$c\n";
+      }
+      $s .= "\n";
+    }
     return $s;
   }
 
@@ -148,15 +196,47 @@ class Heptachord extends Chordophone {
     $En = self::str_En($nfo);
     $Bn = self::str_Bn($nfo);
 
-    return  "\n\t"
-    . $Tl . "\n\t"
-    . $Fn . "\n\t"
-    . $Cn . "\n\t"
-    . $Gn . "\n\t"
-    . $Dn . "\n\t"
-    . $An . "\n\t"
-    . $En . "\n\t"
-    . $Bn . "\n\n";
+    $t = "\n\t";
+    $fmt = "$t%s$t%s$t%s$t%s$t%s$t%s$t%s$t%s\n\n";
+    $s = sprintf($fmt, $Tl, $Fn, $Cn, $Gn, $Dn, $An, $En, $Bn);
+    return $s;
+  }
+
+}
+
+class Hexachord extends Chordophone {
+
+  public static function eadgbe ($qp='n0') {
+    $prc = __FUNCTION__;
+    $nfo = self::retrieve($qp);
+
+    $Tl = self::diadem($qp, $prc);
+    $En = self::str_En($nfo);
+    $Bn = self::str_Bn($nfo);
+    $Gn = self::str_Gn($nfo);
+    $Dn = self::str_Dn($nfo);
+    $An = self::str_An($nfo);
+    $En = self::str_En($nfo);
+
+    $t = "\n\t";
+    $fmt = "$t%s$t%s$t%s$t%s$t%s$t%s$t%s\n\n";
+    $s = sprintf($fmt, $Tl, $En, $Bn, $Gn, $Dn, $An, $En);
+    return $s;
+  }
+
+  public static function fkbjdn ($qp='n0') {
+    $prc = __FUNCTION__;
+    $nfo = self::retrieve($qp);
+
+    $Tl = self::diadem($qp, $prc);
+    $Dn = self::str_Dn($nfo);
+    $Bj = self::str_Bj($nfo);
+    $Fk = self::str_Fk($nfo);
+
+    $t = "\n\t";
+    $fmt = "$t%s$t%s$t%s$t%s$t%s$t%s$t%s\n\n";
+    $s = sprintf($fmt, $Tl, $Dn, $Bj, $Fk, $Dn, $Bj, $Fk);
+    return $s;
   }
 
 }
@@ -174,57 +254,28 @@ class Pentachord extends Chordophone {
     $Gn = self::str_Gn($nfo);
     $Cn = self::str_Cn($nfo);
 
-    return  "\n\t"
-    . $Tl . "\n\t"
-    . $En . "\n\t"
-    . $An . "\n\t"
-    . $Dn . "\n\t"
-    . $Gn . "\n\t"
-    . $Cn . "\n\n";
+    $t = "\n\t";
+    $fmt = "$t%s$t%s$t%s$t%s$t%s$t%s\n\n"; 
+    $s = sprintf($fmt, $Tl, $En, $An, $Dn, $Gn, $Cn);
+    return $s;
   }
 
 }
 
-class Hexachord extends Chordophone {
+class Tetrachord extends Chordophone {
 
-  public static function eadgbe ($qp='n0') {
+  public static function fbfb ($qp='n0') {
     $prc = __FUNCTION__;
     $nfo = self::retrieve($qp);
 
     $Tl = self::diadem($qp, $prc);
     $Bn = self::str_Bn($nfo);
-    $Gn = self::str_Gn($nfo);
-    $Dn = self::str_Dn($nfo);
-    $An = self::str_An($nfo);
-    $En = self::str_En($nfo);
+    $Fn = self::str_Fn($nfo);
 
-    return  "\n\t"
-    . $Tl . "\n\t"
-    . $En . "\n\t"
-    . $Bn . "\n\t"
-    . $Gn . "\n\t"
-    . $Dn . "\n\t"
-    . $An . "\n\t"
-    . $En . "\n\n";
-  }
-
-  public static function fkbjdn ($qp='n0') {
-    $prc = __FUNCTION__;
-    $nfo = self::retrieve($qp);
-
-    $Tl = self::diadem($qp, $prc);
-    $Dn = self::str_Dn($nfo);
-    $Bj = self::str_Bj($nfo);
-    $Fk = self::str_Fk($nfo);
-
-    return  "\n\t"
-    . $Tl . "\n\t"
-    . $Dn . "\n\t"
-    . $Bj . "\n\t"
-    . $Fk . "\n\t"
-    . $Dn . "\n\t"
-    . $Bj . "\n\t"
-    . $Fk . "\n\n";
+    $t = "\n\t";
+    $fmt = "$t%s$t%s$t%s$t%s$t%s\n\n"; 
+    $s = sprintf($fmt, $Tl, $Bn, $Fn, $Bn, $Fn);
+    return $s;
   }
 
 }
